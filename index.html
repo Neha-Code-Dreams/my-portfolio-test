@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational Portfolio | Web Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #8A2BE2;
+            --secondary: #9370DB;
+            --accent: #B19CD9;
+            --light: #F8F9FA;
+            --dark: #212529;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--light) 0%, #E6E6FA 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            margin: 0;
+            perspective: 1000px;
+        }
+
+        .header {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 4rem;
+            text-align: center;
+            color: white;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            transform-style: preserve-3d;
+            transform: rotateX(5deg);
+            box-shadow: 0 20px 50px rgba(138,43,226,0.3);
+        }
+
+        .education-timeline {
+            max-width: 1200px;
+            margin: 6rem auto;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(var(--primary), var(--secondary));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            width: calc(50% - 30px);
+            margin: 3rem 0;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+
+        .timeline-item:nth-child(odd) {
+            margin-left: auto;
+            transform: translateZ(20px) rotateY(-5deg);
+        }
+
+        .timeline-item:nth-child(even) {
+            transform: translateZ(20px) rotateY(5deg);
+        }
+
+        .timeline-item-content {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(138,43,226,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            left: -40px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            right: -40px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            padding: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(20px);
+            box-shadow: 0 20px 40px rgba(138,43,226,0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card:hover {
+            transform: translateZ(40px) scale(1.05);
+            box-shadow: 0 30px 60px rgba(138,43,226,0.25);
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 6rem auto;
+            padding: 3rem;
+            background: rgba(255,255,255,0.95);
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(138,43,226,0.2);
+            transform-style: preserve-3d;
+            transform: translateZ(30px);
+            backdrop-filter: blur(10px);
+        }
+
+        .profile-image {
+            width: 350px;
+            height: 350px;
+            border-radius: 30px;
+            object-fit: cover;
+            transition: all 0.6s ease;
+            box-shadow: 0 15px 30px rgba(138,43,226,0.2);
+        }
+
+        .profile-image:hover {
+            transform: translateZ(50px) rotate(5deg);
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .skill-tag {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            transform-style: preserve-3d;
+            transform: translateZ(10px);
+            box-shadow: 0 10px 20px rgba(138,43,226,0.15);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            transform: translateZ(20px) scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-line {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 50px);
+                margin-left: 50px !important;
+            }
+
+            .timeline-item::before {
+                left: -40px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1 class="text-5xl font-bold mb-4">Web Development Portfolio</h1>
+        <p class="text-xl">Crafting Digital Experiences & Interactive Solutions</p>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Profile" class="profile-image">
+            <div>
+                <h2 class="text-4xl font-bold mb-4">Educational Background</h2>
+                <p class="text-lg mb-6">Full Stack Web Developer with expertise in modern technologies and creative problem-solving.</p>
+                <div class="skills-container">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">MongoDB</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="education-timeline">
+            <div class="timeline-line"></div>
+            <h2 class="text-4xl font-bold text-center mb-12">Educational Journey</h2>
+            <div class="timeline-item">
+                <div class="timeline-item-content">
+                    <h3 class="text-2xl font-bold">Bachelor's in Computer Science</h3>
+                    <p class="text-lg text-gray-600">University of Technology | 2018-2022</p>
+                    <p>Specialized in Web Technologies and Software Development</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-item-content">
+                    <h3 class="text-2xl font-bold">Full Stack Development Certification</h3>
+                    <p class="text-lg text-gray-600">Tech Academy | 2022</p>
+                    <p>Intensive program covering MERN stack development</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-item-content">
+                    <h3 class="text-2xl font-bold">UI/UX Design Course</h3>
+                    <p class="text-lg text-gray-600">Design Institute | 2023</p>
+                    <p>Advanced user interface and experience design principles</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects-grid">
+            <div class="project-card">
+                <h3 class="text-2xl font-bold mb-4">E-Learning Platform</h3>
+                <p class="mb-4">A comprehensive online learning management system with real-time collaboration features.</p>
+                <p class="text-gray-600">Technologies: React, Node.js, MongoDB</p>
+            </div>
+            <div class="project-card">
+                <h3 class="text-2xl font-bold mb-4">Social Media Dashboard</h3>
+                <p class="mb-4">Analytics and management platform for social media marketing professionals.</p>
+                <p class="text-gray-600">Technologies: Vue.js, Express, PostgreSQL</p>
+            </div>
+            <div class="project-card">
+                <h3 class="text-2xl font-bold mb-4">E-Commerce Solution</h3>
+                <p class="mb-4">Full-featured online store with payment integration and inventory management.</p>
+                <p class="text-gray-600">Technologies: Next.js, Stripe, Firebase</p>
+            </div>
+            <div class="project-card">
+                <h3 class="text-2xl font-bold mb-4">Portfolio Generator</h3>
+                <p class="mb-4">Dynamic portfolio creation tool for creative professionals.</p>
+                <p class="text-gray-600">Technologies: React, GraphQL, AWS</p>
+            </div>
+            <div class="project-card">
+                <h3 class="text-2xl font-bold mb-4">Task Management App</h3>
+                <p class="mb-4">Collaborative project management tool with real-time updates.</p>
+                <p class="text-gray-600">Technologies: Angular, Socket.io, MySQL</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // 3D Tilt Effect
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const xRotation = ((y - rect.height / 2) / rect.height) * 20;
+                const yRotation = ((x - rect.width / 2) / rect.width) * 20;
+                
+                card.style.transform = `perspective(1000px) rotateX(${-xRotation}deg) rotateY(${yRotation}deg) translateZ(50px)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateZ(20px)';
+            });
+        });
+
+        // Smooth scroll animation for timeline items
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = entry.target.classList.contains('timeline-item') ? 
+                        (entry.target.offsetLeft > window.innerWidth / 2 ? 'translateZ(20px) rotateY(-5deg)' : 'translateZ(20px) rotateY(5deg)') :
+                        'translateZ(20px)';
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('.timeline-item, .project-card').forEach(item => {
+            item.style.opacity = 0;
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
